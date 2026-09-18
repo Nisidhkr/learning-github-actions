@@ -19,6 +19,3 @@
 # Finish by printing "Report complete"
 
 
-
-name: exer1
-on: push 

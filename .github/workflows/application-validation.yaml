@@ -1,0 +1,150 @@
+# Lab 1: Create a GitHub Actions Workflow 
+
+# Scenario 
+
+# You are working on a team developing a Node.js web application called Campus Event Manager. The team wants an automated workflow to validate code before it is merged into the main branch. 
+
+# Create a GitHub Actions workflow file named: 
+
+# .github/workflows/application-validation.yml 
+
+# Requirements 
+
+# Your workflow must: 
+
+# Have the name: 
+
+# Campus Event Manager Validation 
+
+# Run automatically when: 
+
+# Code is pushed to the main branch. 
+
+# A pull request targeting the main branch is: 
+
+# opened 
+
+# reopened 
+
+# synchronized 
+
+# Also support manual execution using the Run workflow button. 
+
+# Use an Ubuntu runner. 
+
+# Contain the following steps: 
+
+# Check out the repository code using actions/checkout. 
+
+# 9 
+
+# Display the list of files in the repository. 
+
+# Install dependencies using: 
+
+# npm ci 
+
+# Run the application tests using: 
+
+# npm test 
+
+# Organize the workflow using: 
+
+# One job named validate-application. 
+
+# Meaningful names for all steps. 
+
+# Correct YAML indentation. 
+
+# Appropriate event filters and activity types. 
+
+# Display the event that triggered the workflow using: 
+
+# echo "Workflow triggered by: ${{ github.event_name }}" 
+
+# Expected Workflow Structure 
+
+# Students must create a complete working YAML file. They should not merely write pseudocode. 
+
+# The workflow should include: 
+
+# A workflow name. 
+
+# At least three event configurations: 
+
+# push 
+
+# pull_request 
+
+# workflow_dispatch 
+
+# One job. 
+
+# An Ubuntu runner. 
+
+# Both run commands and uses actions. 
+
+# Submission 
+
+# Students must submit: 
+
+# The file: 
+
+# .github/workflows/application-validation.yml 
+
+# A screenshot showing the workflow file. 
+
+# A screenshot of a successful workflow run. 
+
+
+
+
+
+
+
+
+
+name: Campus Event Manager Validation
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+  workflow_dispatch:
+
+jobs:
+  validate-application:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 24.x
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.x
+          cache: npm
+
+      - name: Display repository files
+        run: ls -la
+
+      - name: Display workflow trigger
+        run: 'echo "Workflow triggered by: ${{ github.event_name }}"'
+
+      - name: Installing dependencies
+        run: npm ci
+
+      - name: Run application tests
+        run: npm test
+
+  

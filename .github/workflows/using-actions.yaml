@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '24.x'
 
+      - name: List files
+        run: ls -la
+
       - name: Install Dependencies
         run: npm ci
 
