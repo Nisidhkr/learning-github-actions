@@ -134,6 +134,7 @@ jobs:
         with:
           node-version: 24.x
           cache: npm
+          cache-dependency-path: react-app/package-lock.json
 
       - name: Display repository files
         run: ls -la
@@ -143,8 +144,10 @@ jobs:
 
       - name: Installing dependencies
         run: npm ci
+        working-directory: react-app
 
       - name: Run application tests
         run: npm test
+        working-directory: react-app
 
   
