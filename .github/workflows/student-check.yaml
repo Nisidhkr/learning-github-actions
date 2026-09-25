@@ -1,0 +1,64 @@
+            # Create the following workflow file: 
+
+            # .github/workflows/student-check.yml 
+
+            # Name the workflow Student Repository Check. 
+
+            # Run the workflow when code is pushed to the main branch and when it is manually started. 
+
+            # Use an Ubuntu runner. 
+
+            # Check out the repository. 
+
+            # Display the student name, roll number, current date and time, repository name, and branch name. 
+
+            # Verify that student.txt exists. 
+
+            # Display the contents of student.txt 
+
+            # Count and display the number of lines in the file. 
+
+            # Search the file for the word GitHub. 
+
+            # Create report.txt containing: Student repository verification completed. 
+
+            # Upload report.txt as an artifact named student-report. 
+
+
+
+
+
+
+
+
+
+
+
+name: Student Repository Check
+on:
+    push:
+        branches:
+            - main
+
+    workflow_dispatch:
+            
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7 
+      - name: Display student information from student.txt
+        run: cat student.txt
+      - name: Count lines in student.txt
+        run: wc -l student.txt
+      - name: Search for the word GitHub in student.txt
+        run: grep -i "GitHub" student.txt || echo "GitHub not found"
+      - name: Create report.txt
+        run: echo "Student repository verification completed." > report.txt
+      - name: Upload report.txt as an artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: student-report
+          path: report.txt
+     
