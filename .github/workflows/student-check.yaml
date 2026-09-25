@@ -49,7 +49,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7 
       - name: Display student information from student.txt
-        run: cat /student.txt
+        run: cat student.txt
       - name: Count lines in student.txt
         run: wc -l student.txt
       - name: Search for the word GitHub in student.txt
